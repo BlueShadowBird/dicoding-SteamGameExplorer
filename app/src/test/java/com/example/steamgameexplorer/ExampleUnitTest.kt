@@ -1,4 +1,4 @@
-package com.example.android_template
+package com.example.steamgameexplorer
 
 import org.junit.Test
 
