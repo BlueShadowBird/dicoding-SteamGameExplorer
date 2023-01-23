@@ -14,3 +14,5 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Steam-Game-Explorer"
 include ':app'
+include ':core'
+include ':favorite'

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.view.GameActivity">
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/image_logo"
+        style="@style/Detail.Image"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/header"
+        android:contentDescription="@string/game_picture" />
+
+    <ImageView
+        android:id="@+id/favorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#4D000000"
+        android:drawablePadding="4dp"
+        android:elevation="2dp"
+        android:padding="8dp"
+        android:src="@drawable/ic_favorite"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/image_logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/image_logo"
+        app:layout_constraintVertical_bias="0.95"
+        android:contentDescription="@string/favorite" />
+
+    <TextView
+        style="@style/Detail.Text.Title"
+        android:id="@+id/name"
+        android:text="@string/app_name"
+        android:textSize="32sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/image_logo" />
+
+    <TextView
+        style="@style/Detail.Text.Price"
+        android:id="@+id/price"
+        tools:text="@string/app_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/name" />
+
+    <TextView
+        style="@style/Detail.Text.Price"
+        android:id="@+id/final_price"
+        tools:text="@string/app_name"
+        android:visibility="gone"
+        app:layout_constraintStart_toEndOf="@id/price"
+        app:layout_constraintTop_toBottomOf="@id/name" />
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:lineSpacingMultiplier="1"
+        android:text="@string/app_name"
+        android:textColor="@android:color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/price" />
+
+    <View
+        android:id="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_margin="8dp"
+        android:background="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/description"/>
+
+    <TextView
+        style="@style/Detail.Text.Info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/language"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/line1" />
+
+    <TextView
+        style="@style/Detail.Text.Info.Value"
+        android:id="@+id/supported_languages"
+        tools:text="@string/app_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/guideline"
+        app:layout_constraintTop_toBottomOf="@id/line1" />
+
+    <TextView
+        style="@style/Detail.Text.Info"
+        android:text="@string/platforms"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/supported_languages" />
+
+    <TextView
+        style="@style/Detail.Text.Info.Value"
+        android:id="@+id/platforms"
+        tools:text="@string/app_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/guideline"
+        app:layout_constraintTop_toBottomOf="@id/supported_languages" />
+
+    <TextView
+        style="@style/Detail.Text.Info"
+        android:text="@string/release_date"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/platforms" />
+
+    <TextView
+        style="@style/Detail.Text.Info.Value"
+        android:id="@+id/release_date"
+        android:layout_width="0dp"
+        tools:text="@string/app_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/guideline"
+        app:layout_constraintTop_toBottomOf="@id/platforms" />
+
+    <View
+        android:id="@+id/line2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_margin="8dp"
+        android:background="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/release_date"/>
+
+    <TextView
+        style="@style/Detail.Text.Info"
+        android:id="@+id/requirements"
+        android:text="@string/requirements"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/line2" />
+
+    <TextView
+        style="@style/Detail.Text.Info.Value"
+        android:id="@+id/minimum_requirements"
+        tools:text="@string/app_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/requirements"
+        app:layout_constraintTop_toBottomOf="@id/requirements" />
+
+    <TextView
+        style="@style/Detail.Text.Info.Value"
+        android:id="@+id/recommended_requirements"
+        tools:text="@string/app_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/requirements"
+        app:layout_constraintTop_toBottomOf="@id/minimum_requirements" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="109dp" />
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

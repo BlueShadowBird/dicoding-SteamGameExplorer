@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">Steam Game Explorer</string>
+    <string name="title_favorite">Favorite</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search_hint">Type Your Game Title</string>
+    <string name="game_image">Game Image</string>
+    <string name="language">Language</string>
+    <string name="platforms">platforms</string>
+    <string name="release_date">Release Date</string>
+    <string name="recommended_requirements">Recommended Requirements</string>
+    <string name="requirements">Requirements</string>
+    <string name="game_picture">Game Picture</string>
+    <string name="favorite">Favorite</string>
+    <string name="search">Search</string>
 </resources>
