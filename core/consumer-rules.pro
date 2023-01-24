@@ -1,0 +1,1 @@
+-keep,includedescriptorclasses class net.sqlcipher.** { *; }
