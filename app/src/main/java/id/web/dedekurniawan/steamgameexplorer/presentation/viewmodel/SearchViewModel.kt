@@ -7,8 +7,8 @@ import id.web.dedekurniawan.steamgameexplorer.core.domain.usecase.SteamGameUseCa
 import kotlinx.coroutines.launch
 
 class SearchViewModel(private val useCase: SteamGameUseCase): ViewModel() {
-    private val _searchResult = MediatorLiveData<Result<Game>>()
-    val searchResult: LiveData<Result<Game>> = _searchResult
+    private val _searchResult = MediatorLiveData<Result<List<Game>>>()
+    val searchResult: LiveData<Result<List<Game>>> = _searchResult
 
     fun searchGame(query: String) {
         viewModelScope.launch {

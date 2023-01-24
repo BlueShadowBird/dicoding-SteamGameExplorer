@@ -16,28 +16,31 @@ import com.google.android.play.core.splitinstall.SplitInstallManager
 import id.web.dedekurniawan.steamgameexplorer.R
 import id.web.dedekurniawan.steamgameexplorer.core.adapter.GameAdapter
 import id.web.dedekurniawan.steamgameexplorer.core.data.remote.Result
-import id.web.dedekurniawan.steamgameexplorer.core.domain.model.Game
 import id.web.dedekurniawan.steamgameexplorer.databinding.ActivityMainBinding
 import id.web.dedekurniawan.steamgameexplorer.presentation.view.GameActivity
 import id.web.dedekurniawan.steamgameexplorer.presentation.viewmodel.SearchViewModel
 import com.google.android.play.core.splitinstall.SplitInstallManagerFactory
 import com.google.android.play.core.splitinstall.SplitInstallRequest
+import id.web.dedekurniawan.steamgameexplorer.core.utils.alert
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
-    private val gameList = mutableListOf<Game>()
-
     private val adapter: GameAdapter by inject()
     private val viewModel: SearchViewModel by viewModel()
 
-    private val moduleFavorite = "favorite"
+    private lateinit var moduleFavorite: String
+
     private lateinit var splitInstallManager: SplitInstallManager
     private var isFavoriteModuleInstalled = false
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        moduleFavorite = getString(R.string.favorite_module)
 
         splitInstallManager = SplitInstallManagerFactory.create(this)
         isFavoriteModuleInstalled = splitInstallManager.installedModules.contains(moduleFavorite)
@@ -56,24 +59,20 @@ class MainActivity : AppCompatActivity() {
         viewModel.searchResult.observe(this){ result ->
             when(result){
                 is Result.Loading -> {
-                    gameList.clear()
-//                    adapter.submitList(gameList)
-                    binding.message.visibility = View.VISIBLE
                     binding.progressBar.visibility = View.VISIBLE
                 }
-                is Result.Data -> {
-                    result.data?.let {
-                        gameList.add(it)
-                        adapter.submitList(gameList)
-                        adapter.notifyDataSetChanged()  // without this, RV not updated
-                    }
+                is Result.Success -> {
+                    val gameList = result.data
+                    binding.progressBar.visibility = View.GONE
+                   if (gameList?.size == 0){
+                       alert(binding.root, "No Game Found")
+                   }else {
+                       adapter.submitList(gameList)
+                   }
                 }
                 is Result.Error -> {
-                    binding.message.visibility = View.VISIBLE
-                    binding.message.text = result.message
-                }
-                else -> {
                     binding.progressBar.visibility = View.GONE
+                    alert(binding.root, result.message.toString())
                 }
             }
         }
@@ -91,7 +90,6 @@ class MainActivity : AppCompatActivity() {
         searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 searchView.clearFocus()
-                binding.message.visibility = View.GONE
                 viewModel.searchGame(query)
                 return true
             }
@@ -118,7 +116,7 @@ class MainActivity : AppCompatActivity() {
             mAlertDialog.setIcon(R.mipmap.ic_launcher_round) //set alertdialog icon
             mAlertDialog.setTitle("Install Favorite!") //set alertdialog title
             mAlertDialog.setMessage("Dou want to download and install favorite feature") //set alertdialog message
-            mAlertDialog.setPositiveButton("Yes") { dialog, id ->
+            mAlertDialog.setPositiveButton("Yes") { _, _ ->
                 val request = SplitInstallRequest.newBuilder()
                     .addModule(moduleFavorite)
                     .build()

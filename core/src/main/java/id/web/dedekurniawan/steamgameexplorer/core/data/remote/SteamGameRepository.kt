@@ -20,10 +20,11 @@ class SteamGameRepository(
 
 ): ISteamGameRepository{
 
-    override suspend fun searchGame(keyWord: String): Flow<Result<Game>> = flow {
+    override suspend fun searchGame(keyWord: String): Flow<Result<List<Game>>> = flow {
         emit(Result.Loading())
         try {
             val gameDataItemList = apiService.searchGame(keyWord)
+            val listGame = mutableListOf<Game>()
             gameDataItemList.forEach { gameDataItem ->
                 try {
                     val appId = gameDataItem.appId
@@ -35,9 +36,7 @@ class SteamGameRepository(
                     }else{
                         favorite.toDomainModel()
                     }
-                    if(game==null)emit(Result.Error("No data"))
-                    else emit(Result.Data(game))
-
+                    if(game!=null)listGame.add(game)
                 }catch (e: java.lang.Exception){
                     e.printStackTrace()
                     e.message?.let { message ->
@@ -45,12 +44,11 @@ class SteamGameRepository(
                     }
                 }
             }
-            emit(Result.Done())
+            emit(Result.Success(listGame))
         }catch (e: java.lang.Exception){
             e.printStackTrace()
             e.message?.let { message ->
                 emit(Result.Error(StringBuilder("Failed search Game: ").append(message).toString()))
-                emit(Result.Done())
             }
         }
     }

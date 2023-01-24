@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 import id.web.dedekurniawan.steamgameexplorer.core.data.remote.Result
 
 class SteamGameInteractor(private val repository: ISteamGameRepository): SteamGameUseCase {
-    override suspend fun searchGame(keyWord: String): Flow<Result<Game>> = repository.searchGame(keyWord)
+    override suspend fun searchGame(keyWord: String): Flow<Result<List<Game>>> = repository.searchGame(keyWord)
 
     override fun saveGameToFavorite(game: Game) {
         repository.saveGameToFavorite(game)

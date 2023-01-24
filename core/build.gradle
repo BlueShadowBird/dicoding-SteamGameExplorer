@@ -16,6 +16,9 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
+
+        buildConfigField("String", "STEAMCOMMUNITY_CERTIFICATE", '"sha256/OUGKtI4W27b23AN44SYFZHxGA73dGM1PLSacPP87wFE="')
+        buildConfigField("String", "STEAMSTORE_CERTIFICATE", '"sha256//qo8+MzlePvqkQBEppXfcixW51CgD8+f1/U0FPyCnWM="')
     }
 
     buildTypes {
@@ -41,6 +44,9 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
     implementation "com.squareup.okhttp3:logging-interceptor:$logging_interceptor_version"
+
+    implementation "net.zetetic:android-database-sqlcipher:$sqlcipher_version"
+    implementation "androidx.sqlite:sqlite-ktx:$sqlite_ktx_version"
 
     //room
     implementation "androidx.room:room-runtime:$room_version"

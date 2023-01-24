@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import id.web.dedekurniawan.steamgameexplorer.R
 import id.web.dedekurniawan.steamgameexplorer.core.domain.model.Game
+import id.web.dedekurniawan.steamgameexplorer.core.utils.alert
 import id.web.dedekurniawan.steamgameexplorer.core.utils.numberFormat
 import id.web.dedekurniawan.steamgameexplorer.core.utils.toHTML
 import id.web.dedekurniawan.steamgameexplorer.databinding.ActivityGameBinding
@@ -30,6 +31,7 @@ class GameActivity : AppCompatActivity() {
         val game = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             intent.getParcelableExtra(EXTRA_GAME, Game::class.java)
         }else{
+            @Suppress("DEPRECATION")
             intent.getParcelableExtra(EXTRA_GAME) as Game?
         }
         bindGame(game!!)
@@ -74,8 +76,10 @@ class GameActivity : AppCompatActivity() {
             favorite.setOnClickListener {
                 if(game.favorited){
                     viewModel.deleteFavoriteGame(game)
+                    alert(binding.root, "Remove From Favorite")
                 }else{
                    viewModel.saveGameToFavorite(game)
+                    alert(binding.root, "Add To Favorite")
                 }
             }
         }

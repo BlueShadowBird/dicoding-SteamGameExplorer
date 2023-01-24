@@ -13,8 +13,11 @@ buildscript {
     ext.retrofit_version = "2.9.0"
     ext.logging_interceptor_version = '4.9.0'
     ext.lifecycle_version = "2.5.1"
-    ext.play_core_version = "1.7.3"
+    ext.play_core_version = "1.10.3"
     ext.glide_version = "4.11.0"
+
+    ext.sqlite_ktx_version = "2.3.0"
+    ext.sqlcipher_version = "4.4.0"
 }
 
 plugins {
